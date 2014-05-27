@@ -19,7 +19,7 @@ public class Convertisseur {
 
     // initialise la liste des mesures depuis le fichier XML
     // initializes the list of measures from the XML file
-    public static List<Mesure> listeMesure = initialiserListMesure();
+    public static List<Mesure> listMeasure = initialiserListMesure();
 
     public static BigDecimal convertirDeuxUnite(String mesure, String nomUniteIn,
 	    String nomUniteOut, BigDecimal valeurIn) {
@@ -40,27 +40,27 @@ public class Convertisseur {
 
 	// On va se placer dans la bonne mesure pour recuperer multi et addition
 	// It will be placed in good measure to recover the multiplier and adding
-	for (int i = 0; i < listeMesure.size(); i++) {
+	for (int i = 0; i < listMeasure.size(); i++) {
 	    // Si le nom de la mesure existe
-	    if (listeMesure.get(i).getNomMesure().equals(mesure)) {
+	    if (listMeasure.get(i).getNomMesure().equals(mesure)) {
 		// On va chercher les deux unites
 		// If the name of the measure are
-		for (int j = 0; j < listeMesure.get(i).getLstUnite().size(); j++) {
+		for (int j = 0; j < listMeasure.get(i).getLstUnite().size(); j++) {
 		    // IN
-		    if (listeMesure.get(i).getLstUnite().get(j).getNomUnite()
+		    if (listMeasure.get(i).getLstUnite().get(j).getNomUnite()
 			    .equals(nomUniteIn)) {
-			multiIn = listeMesure.get(i).getLstUnite().get(j)
+			multiIn = listMeasure.get(i).getLstUnite().get(j)
 				.getmultiParRapportDefaut();
-			additionIn = listeMesure.get(i).getLstUnite().get(j)
+			additionIn = listMeasure.get(i).getLstUnite().get(j)
 				.getadditionParRapportDefaut();
 			in = false;
 		    }
 		    // OUT
-		    if (listeMesure.get(i).getLstUnite().get(j).getNomUnite()
+		    if (listMeasure.get(i).getLstUnite().get(j).getNomUnite()
 			    .equals(nomUniteOut)) {
-			multiOut = listeMesure.get(i).getLstUnite().get(j)
+			multiOut = listMeasure.get(i).getLstUnite().get(j)
 				.getmultiParRapportDefaut();
-			additionOut = listeMesure.get(i).getLstUnite().get(j)
+			additionOut = listMeasure.get(i).getLstUnite().get(j)
 				.getadditionParRapportDefaut();
 			out = false;
 		    }
@@ -216,17 +216,17 @@ public class Convertisseur {
 	boolean doublon = false;
 	boolean mesureExiste = false;
 
-	for (int i = 0; i < listeMesure.size(); i++) {
-	    if (listeMesure.get(i).getNomMesure().equals(nomMesure)) {
+	for (int i = 0; i < listMeasure.size(); i++) {
+	    if (listMeasure.get(i).getNomMesure().equals(nomMesure)) {
 		mesureExiste = true;
-		for (int j = 0; j < listeMesure.get(i).getLstUnite().size(); j++) {
-		    if (listeMesure.get(i).getLstUnite().get(j).getNomUnite()
+		for (int j = 0; j < listMeasure.get(i).getLstUnite().size(); j++) {
+		    if (listMeasure.get(i).getLstUnite().get(j).getNomUnite()
 			    .equals(nomUnite)) {
 			doublon = true;
 		    }
 		}
 		if (!doublon) {
-		    listeMesure.get(i).getLstUnite().add(unite);
+		    listMeasure.get(i).getLstUnite().add(unite);
 		} else {
 		    System.out.print(" \n   Impossible d'ajouter " + nomUnite
 			    + ", cette unite existe deja dans " + nomMesure
@@ -253,12 +253,12 @@ public class Convertisseur {
     public static void supprimerUnite(String nomMesure, String nomUnite) {
 	boolean validUnite = false;
 	boolean validMesure = false;
-	for (int i = 0; i < listeMesure.size(); i++) {
-	    if (listeMesure.get(i).getNomMesure().equals(nomMesure)) {
-		for (int j = 0; j < listeMesure.get(i).getLstUnite().size(); j++) {
-		    if (listeMesure.get(i).getLstUnite().get(j).getNomUnite()
+	for (int i = 0; i < listMeasure.size(); i++) {
+	    if (listMeasure.get(i).getNomMesure().equals(nomMesure)) {
+		for (int j = 0; j < listMeasure.get(i).getLstUnite().size(); j++) {
+		    if (listMeasure.get(i).getLstUnite().get(j).getNomUnite()
 			    .equals(nomUnite)) {
-			listeMesure.get(i).getLstUnite().remove(j);
+			listMeasure.get(i).getLstUnite().remove(j);
 			validUnite = true;
 		    }
 		}
@@ -289,12 +289,12 @@ public class Convertisseur {
 	try {
 	    Writer w = new FileWriter(fic);
 	    String reecritureDansLeFichier = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><umlConvertisseur>";
-	    for (int i = 0; i < listeMesure.size(); i++) {
+	    for (int i = 0; i < listMeasure.size(); i++) {
 		reecritureDansLeFichier += "<mesure nomMesure=\""
-			+ listeMesure.get(i).getNomMesure() + "\">";
-		for (int j = 0; j < listeMesure.get(i).getLstUnite().size(); j++) {
+			+ listMeasure.get(i).getNomMesure() + "\">";
+		for (int j = 0; j < listMeasure.get(i).getLstUnite().size(); j++) {
 
-		    Unite unitCourant = listeMesure.get(i).getLstUnite().get(j);
+		    Unite unitCourant = listMeasure.get(i).getLstUnite().get(j);
 		    reecritureDansLeFichier += "<unite nomUnite=\""
 			    + unitCourant.getNomUnite() + "\" multi=\""
 			    + unitCourant.getmultiParRapportDefaut()

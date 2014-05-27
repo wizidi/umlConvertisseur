@@ -8,25 +8,20 @@ import java.util.Scanner;
 
 public class Interface {
 
-    static List<Mesure> listeMesure = Convertisseur.listeMesure;
+    static List<Mesure> listMeasure = Convertisseur.listMeasure;
     
     
     public static void main(String[] args) throws IOException {
         initialiser();
     }
 
-    // //////////////////
-    // MENU de depart //
-    // //////////////////
+    // /////// 
+    // MENU //
+    // /////// 
     public static void initialiser() throws IOException {
 
-
-
-        // Une fois la liste des mesures initialise, affichage du menu
         int reponseMenu = 0;
 
-        // On a recupere l'ensemble du fichier xml
-        // On peut maintenant afficher le menu e l'utilisateur
         while ((reponseMenu != 42)) {
             System.out
                     .println(" \n _________________________________________________________ ");
@@ -70,11 +65,11 @@ public class Interface {
                             .print("  \n  Vous devez indiquer l'un des choix du menu, un entier : 1, 2, 3, 4, 5 ou 42.\n \n");
                 case 1:
                     System.out.println("   \n Les differentes mesure : ");
-                    afficherMesure(listeMesure);
+                    afficherMesure(listMeasure);
                     break;
                 case 2:
                     System.out.println("   \n Les differentes mesure : ");
-                    afficherMesureEtUnite(listeMesure);
+                    afficherMesureEtUnite(listMeasure);
                     break;
                 case 3:
                     convertir();
@@ -99,13 +94,18 @@ public class Interface {
 
         // Recup nomUniteIn
         System.out
-                .println(" \n  Dans quel mesure se situe les deux unitees que vous souhaitez convertir : ");
-        afficherMesure(listeMesure);
+                .println(" \n  Dans quelle mesure se situent les deux unitees que vous souhaitez convertir : ");
+        afficherMesure(listMeasure);
         System.out.print(" \n  Choix : ");
         @SuppressWarnings("resource")
         Scanner s = new Scanner(System.in);
         // On recupere la reponse
         String nomMesure = s.next().trim();
+            for (Mesure mes : listMeasure){
+        	if (mes.getNomMesure().endsWith(nomMesure)){
+        	    afficherUniteDeMesure(mes);
+        	}
+            }
 
         System.out.print(" \n  Le nom de l'unite en entree : ");
 
@@ -116,7 +116,7 @@ public class Interface {
 
         // Recup valIn
         System.out
-                .print(" \n  Quel est la valeur e convertir (valeur en " + nomUniteIn + ") : ");
+                .print(" \n  Quel est la valeur a convertir (valeur en " + nomUniteIn + ") : ");
         @SuppressWarnings("resource")
         Scanner sc = new Scanner(System.in);
         // On recupere la reponse
@@ -148,7 +148,7 @@ public class Interface {
 
         System.out
                 .print(" \n  Dans quel mesure se situe l'unite que vous souhaitez supprimer : ");
-        afficherMesure(listeMesure);
+        afficherMesure(listMeasure);
         System.out.print(" \n  Choix : ");
         @SuppressWarnings("resource")
         Scanner s = new Scanner(System.in);
@@ -183,7 +183,7 @@ public class Interface {
 
         System.out
                 .print(" \n  Dans quel mesure souhaitez vous ajouter une unite ? \n");
-        afficherMesureEtUnite(listeMesure);
+        afficherMesureEtUnite(listMeasure);
         System.out.print(" \n  Choix : ");
         @SuppressWarnings("resource")
         Scanner s = new Scanner(System.in);
@@ -239,9 +239,9 @@ public class Interface {
 
     }
     
- // /////////////////////////////////////////////
-    // Afficher Mesure // Afficher Mesure&Unite //
-    // /////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////
+    // Afficher Mesure // Afficher Mesure&Unite // Afficher unité d'une mesure //
+    // //////////////////////////////////////////////////////////////////////////
     private static void afficherMesureEtUnite(List<Mesure> listeMesure) {
         for (int i = 0; i < listeMesure.size(); i++) {
             System.out.println("   > " + listeMesure.get(i).getNomMesure());
@@ -259,8 +259,14 @@ public class Interface {
     }
 
     private static void afficherMesure(List<Mesure> listeMesure) {
-        for (int i = 0; i < listeMesure.size(); i++) {
-            System.out.println("   > " + listeMesure.get(i).getNomMesure());
+        for (Mesure mesure : listeMesure) {
+            System.out.println("   > " + mesure.getNomMesure());
         }
+    }
+    
+    private static void afficherUniteDeMesure(Mesure mesure){
+	for (Unite unite : mesure.getLstUnite()){
+	    System.out.println("   > " + unite.getNomUnite());
+	}
     }
 }

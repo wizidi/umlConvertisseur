@@ -4,8 +4,8 @@ import java.util.List;
 
 public class Mesure {
 
-    public String nomMesure;
-    public List<Unite> lstUnite;
+    public String nameMesure;
+    public List<Unite> listUnit;
 
     public Mesure() {
         super();
@@ -13,29 +13,29 @@ public class Mesure {
 
     public Mesure(String nomMesure, List<Unite> lstUnite) {
         super();
-        this.nomMesure = nomMesure;
-        this.lstUnite = lstUnite;
+        this.nameMesure = nomMesure;
+        this.listUnit = lstUnite;
     }
 
     public Mesure(String nomMesure) {
         super();
-        this.nomMesure = nomMesure;
+        this.nameMesure = nomMesure;
     }
 
     public String getNomMesure() {
-        return nomMesure;
+        return nameMesure;
     }
 
     public void setNomMesure(String nomMesure) {
-        this.nomMesure = nomMesure;
+        this.nameMesure = nomMesure;
     }
 
     public List<Unite> getLstUnite() {
-        return lstUnite;
+        return listUnit;
     }
 
     public void setLstUnite(List<Unite> lstUnite) {
-        this.lstUnite = lstUnite;
+        this.listUnit = lstUnite;
     }
 
 }
