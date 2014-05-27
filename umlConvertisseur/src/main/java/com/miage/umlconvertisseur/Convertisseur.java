@@ -17,22 +17,19 @@ import org.xml.sax.SAXException;
 
 public class Convertisseur {
 
-    // Permet d'initialiser la liste des mesures depuis le fichier XML
+    // initialise la liste des mesures depuis le fichier XML
+    // initializes the list of measures from the XML file
     public static List<Mesure> listeMesure = initialiserListMesure();
-
-
 
     public static BigDecimal convertirDeuxUnite(String mesure, String nomUniteIn,
 	    String nomUniteOut, BigDecimal valeurIn) {
-	//	    	context Main::convertir(mesure, uniteIn, uniteOut) pre
-	//		 self->forAll(m:Mesure | m = mesure implies(m->forAll(u:Unite | u=uniteIn)))
-	//		 self->forAll(m:Mesure | m = mesure implies(m->forAll(u:Unite | u=uniteOut)))
 
-	// On cherche la valeur de la l'unit� OUT
+	// On cherche la valeur de la l'unite OUT
+	// The value of the unity we seek OUT
 	BigDecimal valeurOut = new BigDecimal("0");
 
-	// On initialise les variables qui vont nous servir � r�aliser les
-	// calculs
+	// On initialise les variables qui vont nous servir a realiser les calculs
+	// We initialize variables that will serve us realize calculations
 	BigDecimal multiIn = new BigDecimal("0");
 	BigDecimal multiOut = new BigDecimal("0");
 	BigDecimal additionIn = new BigDecimal("0");
@@ -41,11 +38,13 @@ public class Convertisseur {
 	Boolean in = true;
 	Boolean out = true;
 
-	// On va se placer dans la bonne mesure pour r�cup�rer multi et addition
+	// On va se placer dans la bonne mesure pour recuperer multi et addition
+	// It will be placed in good measure to recover the multiplier and adding
 	for (int i = 0; i < listeMesure.size(); i++) {
 	    // Si le nom de la mesure existe
 	    if (listeMesure.get(i).getNomMesure().equals(mesure)) {
-		// On va chercher les deux unit�s
+		// On va chercher les deux unites
+		// If the name of the measure are
 		for (int j = 0; j < listeMesure.get(i).getLstUnite().size(); j++) {
 		    // IN
 		    if (listeMesure.get(i).getLstUnite().get(j).getNomUnite()
@@ -78,12 +77,15 @@ public class Convertisseur {
 	}
 
 	// On teste si <> de 0
+	// It tests whether <> 0
 	if (!in && !out) {
 
-	    // Etape 1, tranformer en unit� de base (exemple : 1km en m :  1 * 1000 (multi km)= 1000m)
+	    // Etape 1, tranformer en unite de base (exemple : 1km en m :  1 * 1000 (multi km)= 1000m)
+	    // Step 2, tranformer in base unit (eg 1km m: 1 * 1000 (multi km) = 1000m)
 	    BigDecimal valBase = valeurIn.multiply(multiIn).add(additionIn);
 
-	    // Etape 2, transformer en unit� out
+	    // Etape 2, transformer en unite out
+	    // Step 2, into unit out
 	    valeurOut = (valBase.subtract(additionOut)).divide(multiOut, 3, BigDecimal.ROUND_HALF_UP);
 
 	    System.out.println("  " + valeurIn + " " + nomUniteIn + " = " + valeurOut + " " + nomUniteOut);
@@ -97,17 +99,20 @@ public class Convertisseur {
     // Initialiser list mesure //
     // ////////////////////////////
     private static List<Mesure> initialiserListMesure() {
-	// Objectif, r�cup�rer la liste des diff�rentes mesures, contenant elles
-	// m�me les diff�rentes unit�s
+	// Objectif, recuperer la liste des differentes mesures, contenant elles meme les differentes unites
+	// Objective, retrieve a list of different measures, they even contain the different units
 	List<Mesure> listeMesure = new ArrayList<Mesure>();
 
-	// On r�cup�re les donn�es du fichier XML situ� ici
+	// On recupere les donnees du fichier XML situe ici
+	// The data from the XML file is recovered is here
 	String fichierXml = "src/main/java/org/data/stockage.xml";
 
-	// Cr�ation d'un document xml (hors du try)
+	// Creation d'un document xml (hors du try)
+	// Creation of an xml documents (excluding try)
 	Document documentXML = null;
 
-	// On cherche � r�cup�rer l'ensemble du contenu du fichier xml
+	// On cherche a recuperer l'ensemble du contenu du fichier xml
+	// It seeks to recover the entire contents of the xml file
 	try {
 	    File donneeDufichier = new File(fichierXml);
 	    DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory
@@ -125,36 +130,47 @@ public class Convertisseur {
 	    System.exit(0);
 	};
 
-	// On r�cup�re la racine du fichier
+	// On recupere la racine du fichier
+	// The root of the file it recovers
 	Element racineFichierXml = documentXML.getDocumentElement();
 
-	// On r�cup�re la liste des mesures
+	// On recupere la liste des mesures
+	// It recovers the list of measures
 	NodeList lstMesureXml = racineFichierXml.getElementsByTagName("mesure");
 
-	// Pour chaque mesure, on r�cup�re l'ensemble des unit de la liste
+	// Pour chaque mesure, on recupere l'ensemble des unit de la liste
+	// For each measure, we recovered all the unit list
 	int i = 0;
 	int lstMesureLength = lstMesureXml.getLength();
 	for (i = 0; i < lstMesureLength; i++) {
 
-	    // on r�cup�re notre mesure
+	    // on recupere notre mesure
+	    // we recovered our measure
 	    Element oneMesure = (Element) lstMesureXml.item(i);
-	    // On r�cup�re le nom de la mesure
+	    
+	    // On recupere le nom de la mesure
+	    // We recovered the name of the measure
 	    String attribut = lstMesureXml.item(i).getAttributes()
 		    .getNamedItem("nomMesure").getTextContent();
 
-	    // On r�cup�re la liste des unit�s
+	    // On recupere la liste des unites
+	    // It recovers the list of units
 	    NodeList lstUnit = oneMesure.getElementsByTagName("unite");
 
-	    // on cr�� la liste des unit�s de la mesure
+	    // on cree la liste des unites de la mesure
+	    // we created a list of units of measurement
 	    List<Unite> lstUnite = new ArrayList<Unite>();
 
-	    // Pour chaque unit� de la liste
+	    // Pour chaque unite de la liste
+	    // For each unit in the list
 	    int lstUnitLength = lstUnit.getLength();
 	    for (int j = 0; j < lstUnitLength; j++) {
-		// on r�cupere le nom
+		// on recupere le nom
+		// we recovered the name
 		String nomUnite = lstUnit.item(j).getAttributes()
 			.getNamedItem("nomUnite").getTextContent();
-		// on r�cupere le multi et le d�calage, en string, donc le parse
+		// on recupere le multi et l'addition, en string, donc le parse
+		// multi and addition is recovered in string, so the parse
 		String multi = lstUnit.item(j).getAttributes()
 			.getNamedItem("multi").getTextContent();
 		BigDecimal multiBigDecimal = new BigDecimal(multi);
@@ -162,34 +178,39 @@ public class Convertisseur {
 			.getNamedItem("addition").getTextContent();
 		BigDecimal additionBigDecimal = new BigDecimal(addition);
 
-		// on cr�� un objet unite avec ces informations
+		// on cree un objet unite avec ces informations
+		// we created a unit object with this information
 		Unite unite = new Unite(nomUnite, multiBigDecimal,
 			additionBigDecimal);
 
-		// on ajoute l'unite � la liste de unit� de la mesure
+		// on ajoute l'unite a la liste de unite de la mesure
+		// unit is added to the list of units of measurement
 		lstUnite.add(unite);
 
 	    }
 
-	    // a chaque fois que l'on trouve une mesure on cr�e un objet mesure
+	    // a chaque fois que l'on trouve une mesure on cree un objet mesure
+	    // every time we find a measure a measure object is created
 	    Mesure mesure = new Mesure();
 	    mesure.setNomMesure(attribut);
 	    mesure.setLstUnite(lstUnite);
 
-	    // On ajoute cette mesure � notre liste de mesure
+	    // On ajoute cette mesure a notre liste de mesure
+	    // This measurement is added to our list of measurement
 	    listeMesure.add(mesure);
 	}
 
 	return listeMesure;
     }
 
-    // ////////////
-    // Ajouter //
-    // ////////////
+    // /////////////////
+    // Ajouter // ADD //
+    // /////////////////
     public static void ajouterUnite(String nomMesure, String nomUnite,
 	    BigDecimal multiUnite, BigDecimal additionUnite) {
 
-	// on cr�� un objet unite avec ces informations
+	// on cree un objet unite avec ces informations
+	// We created a unit object with this information
 	Unite unite = new Unite(nomUnite, multiUnite, additionUnite);
 
 	boolean doublon = false;
@@ -208,7 +229,7 @@ public class Convertisseur {
 		    listeMesure.get(i).getLstUnite().add(unite);
 		} else {
 		    System.out.print(" \n   Impossible d'ajouter " + nomUnite
-			    + ", cette unit� existe d�j� dans " + nomMesure
+			    + ", cette unite existe deja dans " + nomMesure
 			    + " ! \n");
 		}
 	    }
@@ -220,15 +241,15 @@ public class Convertisseur {
 		    + " impossible \n");
 	}
 	if (!doublon && mesureExiste) {
-	    System.out.println(" \n  Ajout de l'unit� " + nomUnite + " effectu� ");
+	    System.out.println(" \n  Ajout de l'unite " + nomUnite + " effectue ");
 	    enregistrerInXML();
 	}
 
     }
 
-    // //////////////
+    // ////////////
     // Supprimer //
-    // //////////////
+    // ////////////
     public static void supprimerUnite(String nomMesure, String nomUnite) {
 	boolean validUnite = false;
 	boolean validMesure = false;
@@ -254,14 +275,14 @@ public class Convertisseur {
 	    }
 	} else {
 	    System.out
-	    .println("\n  Suppression de " + nomUnite + " effectu� ");
+	    .println("\n  Suppression de " + nomUnite + " effectue ");
 	    enregistrerInXML();
 	}
     }
 
-    // ///////////////////////////////////
-    // Enregistrer dans le fichier XML //
-    // ///////////////////////////////////
+    // /////////////////////////////////////////////////////// 
+    // Enregistrer dans le fichier XML // Save the XML file // 
+    // /////////////////////////////////////////////////////// 
     public static void enregistrerInXML() {
 	String fichierXml = "src/stockage.xml";
 	File fic = new File(fichierXml);
