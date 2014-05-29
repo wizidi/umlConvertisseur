@@ -22,11 +22,11 @@ import org.xml.sax.SAXException;
  */
 public class Convertisseur {
 
-    // initialise la liste des mesures depuis le fichier XML
+    // initialise la liste des categorieUnites depuis le fichier XML
     // initializes the list of measures from the XML file
-    public static List<Grandeur> listMeasure = initialiserListMesure();
+    public static List<CategorieUnite> listMeasure = initialiserListCategorieUnite();
 
-    public static BigDecimal convertirDeuxUnite(String mesure, String nomUniteIn,
+    public static BigDecimal convertirDeuxUnite(String categorieUnite, String nomUniteIn,
 	    String nomUniteOut, BigDecimal valeurIn) {
 
 	// On cherche la valeur de la l'unite OUT
@@ -43,11 +43,11 @@ public class Convertisseur {
 	Boolean in = true;
 	Boolean out = true;
 
-	// On va se placer dans la bonne mesure pour recuperer multi et addition
+	// On va se placer dans la bonne categorieUnite pour recuperer multi et addition
 	// It will be placed in good measure to recover the multiplier and adding
 	for (int i = 0; i < listMeasure.size(); i++) {
-	    // Si le nom de la mesure existe
-	    if (listMeasure.get(i).getNomMesure().equals(mesure)) {
+	    // Si le nom de la categorieUnite existe
+	    if (listMeasure.get(i).getNameCategorieUnite().equals(categorieUnite)) {
 		// On va chercher les deux unites
 		// If the name of the measure are
 		for (int j = 0; j < listMeasure.get(i).getLstUnite().size(); j++) {
@@ -101,12 +101,12 @@ public class Convertisseur {
 
 
     // ////////////////////////////
-    // Initialiser list mesure //
+    // Initialiser list categorieUnite //
     // ////////////////////////////
-    private static List<Grandeur> initialiserListMesure() {
-	// Objectif, recuperer la liste des differentes mesures, contenant elles meme les differentes unites
+    private static List<CategorieUnite> initialiserListCategorieUnite() {
+	// Objectif, recuperer la liste des differentes categorieUnites, contenant elles meme les differentes unites
 	// Objective, retrieve a list of different measures, they even contain the different units
-	List<Grandeur> listeMesure = new ArrayList<Grandeur>();
+	List<CategorieUnite> listeCategorieUnite = new ArrayList<CategorieUnite>();
 
 	// On recupere les donnees du fichier XML situe ici
 	// The data from the XML file is recovered is here
@@ -134,30 +134,30 @@ public class Convertisseur {
 	// The root of the file it recovers
 	Element racineFichierXml = documentXML.getDocumentElement();
 
-	// On recupere la liste des mesures
+	// On recupere la liste des categorieUnites
 	// It recovers the list of measures
-	NodeList lstMesureXml = racineFichierXml.getElementsByTagName("mesure");
+	NodeList lstCategorieUniteXml = racineFichierXml.getElementsByTagName("categorieUnite");
 
-	// Pour chaque mesure, on recupere l'ensemble des unit de la liste
+	// Pour chaque categorieUnite, on recupere l'ensemble des unit de la liste
 	// For each measure, we recovered all the unit list
 	int i = 0;
-	int lstMesureLength = lstMesureXml.getLength();
-	for (i = 0; i < lstMesureLength; i++) {
+	int lstCategorieUniteLength = lstCategorieUniteXml.getLength();
+	for (i = 0; i < lstCategorieUniteLength; i++) {
 
-	    // on recupere notre mesure
+	    // on recupere notre categorieUnite
 	    // we recovered our measure
-	    Element oneMesure = (Element) lstMesureXml.item(i);
+	    Element oneCategorieUnite = (Element) lstCategorieUniteXml.item(i);
 	    
-	    // On recupere le nom de la mesure
+	    // On recupere le nom de la categorieUnite
 	    // We recovered the name of the measure
-	    String attribut = lstMesureXml.item(i).getAttributes()
-		    .getNamedItem("nomMesure").getTextContent();
+	    String attribut = lstCategorieUniteXml.item(i).getAttributes()
+		    .getNamedItem("nomCategorieUnite").getTextContent();
 
 	    // On recupere la liste des unites
 	    // It recovers the list of units
-	    NodeList lstUnit = oneMesure.getElementsByTagName("unite");
+	    NodeList lstUnit = oneCategorieUnite.getElementsByTagName("unite");
 
-	    // on cree la liste des unites de la mesure
+	    // on cree la liste des unites de la categorieUnite
 	    // we created a list of units of measurement
 	    List<Unite> lstUnite = new ArrayList<Unite>();
 
@@ -183,30 +183,30 @@ public class Convertisseur {
 		Unite unite = new Unite(nomUnite, multiBigDecimal,
 			additionBigDecimal);
 
-		// on ajoute l'unite a la liste de unite de la mesure
+		// on ajoute l'unite a la liste de unite de la categorieUnite
 		// unit is added to the list of units of measurement
 		lstUnite.add(unite);
 
 	    }
 
-	    // a chaque fois que l'on trouve une mesure on cree un objet mesure
+	    // a chaque fois que l'on trouve une categorieUnite on cree un objet categorieUnite
 	    // every time we find a measure a measure object is created
-	    Grandeur mesure = new Grandeur();
-	    mesure.setNomMesure(attribut);
-	    mesure.setLstUnite(lstUnite);
+	    CategorieUnite categorieUnite = new CategorieUnite();
+	    categorieUnite.setNameCategorieUnite(attribut);
+	    categorieUnite.setLstUnite(lstUnite);
 
-	    // On ajoute cette mesure a notre liste de mesure
+	    // On ajoute cette categorieUnite a notre liste de categorieUnite
 	    // This measurement is added to our list of measurement
-	    listeMesure.add(mesure);
+	    listeCategorieUnite.add(categorieUnite);
 	}
 
-	return listeMesure;
+	return listeCategorieUnite;
     }
 
     // /////////////////
     // Ajouter // ADD //
     // /////////////////
-    public static void ajouterUnite(String nomMesure, String nomUnite,
+    public static void ajouterUnite(String nomCategorieUnite, String nomUnite,
 	    BigDecimal multiUnite, BigDecimal additionUnite) {
 
 	// on cree un objet unite avec ces informations
@@ -214,11 +214,11 @@ public class Convertisseur {
 	Unite unite = new Unite(nomUnite, multiUnite, additionUnite);
 
 	boolean doublon = false;
-	boolean mesureExiste = false;
+	boolean categorieUniteExiste = false;
 
 	for (int i = 0; i < listMeasure.size(); i++) {
-	    if (listMeasure.get(i).getNomMesure().equals(nomMesure)) {
-		mesureExiste = true;
+	    if (listMeasure.get(i).getNameCategorieUnite().equals(nomCategorieUnite)) {
+		categorieUniteExiste = true;
 		for (int j = 0; j < listMeasure.get(i).getLstUnite().size(); j++) {
 		    if (listMeasure.get(i).getLstUnite().get(j).getNomUnite()
 			    .equals(nomUnite)) {
@@ -229,18 +229,18 @@ public class Convertisseur {
 		    listMeasure.get(i).getLstUnite().add(unite);
 		} else {
 		    System.out.print(" \n   Impossible d'ajouter " + nomUnite
-			    + ", cette unite existe deja dans " + nomMesure
+			    + ", cette unite existe deja dans " + nomCategorieUnite
 			    + " ! \n");
 		}
 	    }
 	}
-	if (!mesureExiste) {
+	if (!categorieUniteExiste) {
 	    System.out
-	    .print(" \n   La mesure " + nomMesure
+	    .print(" \n   La categorieUnite " + nomCategorieUnite
 		    + " n'existe pas. Ajoute de " + nomUnite
 		    + " impossible \n");
 	}
-	if (!doublon && mesureExiste) {
+	if (!doublon && categorieUniteExiste) {
 	    System.out.println(" \n  Ajout de l'unite " + nomUnite + " effectue ");
 	    enregistrerInXML();
 	}
@@ -250,11 +250,11 @@ public class Convertisseur {
     // ////////////
     // Supprimer //
     // ////////////
-    public static void supprimerUnite(String nomMesure, String nomUnite) {
+    public static void supprimerUnite(String nomCategorieUnite, String nomUnite) {
 	boolean validUnite = false;
-	boolean validMesure = false;
+	boolean validCategorieUnite = false;
 	for (int i = 0; i < listMeasure.size(); i++) {
-	    if (listMeasure.get(i).getNomMesure().equals(nomMesure)) {
+	    if (listMeasure.get(i).getNameCategorieUnite().equals(nomCategorieUnite)) {
 		for (int j = 0; j < listMeasure.get(i).getLstUnite().size(); j++) {
 		    if (listMeasure.get(i).getLstUnite().get(j).getNomUnite()
 			    .equals(nomUnite)) {
@@ -263,14 +263,14 @@ public class Convertisseur {
 		    }
 		}
 	    } else {
-		validMesure = true;
+		validCategorieUnite = true;
 	    }
 	}
 	if (!validUnite) {
 	    System.out
 	    .print("\n   Suppression de " + nomUnite + " impossible ");
-	    if (!validMesure) {
-		System.out.println("car la Mesure " + nomMesure
+	    if (!validCategorieUnite) {
+		System.out.println("car la CategorieUnite " + nomCategorieUnite
 			+ " n'existe pas ");
 	    }
 	} else {
@@ -290,8 +290,8 @@ public class Convertisseur {
 	    Writer w = new FileWriter(fic);
 	    String reecritureDansLeFichier = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><umlConvertisseur>";
 	    for (int i = 0; i < listMeasure.size(); i++) {
-		reecritureDansLeFichier += "<mesure nomMesure=\""
-			+ listMeasure.get(i).getNomMesure() + "\">";
+		reecritureDansLeFichier += "<categorieUnite nomCategorieUnite=\""
+			+ listMeasure.get(i).getNameCategorieUnite()+ "\">";
 		for (int j = 0; j < listMeasure.get(i).getLstUnite().size(); j++) {
 
 		    Unite unitCourant = listMeasure.get(i).getLstUnite().get(j);
@@ -302,7 +302,7 @@ public class Convertisseur {
 			    + unitCourant.getadditionParRapportDefaut()
 			    + "\" />";
 		}
-		reecritureDansLeFichier += "</mesure>";
+		reecritureDansLeFichier += "</categorieUnite>";
 	    }
 	    reecritureDansLeFichier += "</umlConvertisseur>";
 	    w.write(reecritureDansLeFichier);
