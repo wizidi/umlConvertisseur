@@ -24,7 +24,7 @@ public class Convertisseur {
 
     // initialise la liste des mesures depuis le fichier XML
     // initializes the list of measures from the XML file
-    public static List<Mesure> listMeasure = initialiserListMesure();
+    public static List<Grandeur> listMeasure = initialiserListMesure();
 
     public static BigDecimal convertirDeuxUnite(String mesure, String nomUniteIn,
 	    String nomUniteOut, BigDecimal valeurIn) {
@@ -103,10 +103,10 @@ public class Convertisseur {
     // ////////////////////////////
     // Initialiser list mesure //
     // ////////////////////////////
-    private static List<Mesure> initialiserListMesure() {
+    private static List<Grandeur> initialiserListMesure() {
 	// Objectif, recuperer la liste des differentes mesures, contenant elles meme les differentes unites
 	// Objective, retrieve a list of different measures, they even contain the different units
-	List<Mesure> listeMesure = new ArrayList<Mesure>();
+	List<Grandeur> listeMesure = new ArrayList<Grandeur>();
 
 	// On recupere les donnees du fichier XML situe ici
 	// The data from the XML file is recovered is here
@@ -124,15 +124,10 @@ public class Convertisseur {
 		    .newInstance();
 	    DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
 	    documentXML = docBuilder.parse(donneeDufichier);
-	} catch (SAXException e) {
+	} catch (SAXException | IOException | ParserConfigurationException e) {
 	    e.printStackTrace();
 	    System.exit(0);
-	} catch (IOException e) {
-	    e.printStackTrace();
-	    System.exit(0);
-	} catch (ParserConfigurationException e) {
-	    e.printStackTrace();
-	    System.exit(0);
+	
 	};
 
 	// On recupere la racine du fichier
@@ -196,7 +191,7 @@ public class Convertisseur {
 
 	    // a chaque fois que l'on trouve une mesure on cree un objet mesure
 	    // every time we find a measure a measure object is created
-	    Mesure mesure = new Mesure();
+	    Grandeur mesure = new Grandeur();
 	    mesure.setNomMesure(attribut);
 	    mesure.setLstUnite(lstUnite);
 

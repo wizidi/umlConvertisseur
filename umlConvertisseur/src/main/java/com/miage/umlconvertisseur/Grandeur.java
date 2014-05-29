@@ -2,22 +2,22 @@ package com.miage.umlconvertisseur;
 
 import java.util.List;
 
-public class Mesure {
+public class Grandeur {
 
     public String nameMesure;
     public List<Unite> listUnit;
 
-    public Mesure() {
+    public Grandeur() {
         super();
     }
 
-    public Mesure(String nomMesure, List<Unite> lstUnite) {
+    public Grandeur(String nomMesure, List<Unite> lstUnite) {
         super();
         this.nameMesure = nomMesure;
         this.listUnit = lstUnite;
     }
 
-    public Mesure(String nomMesure) {
+    public Grandeur(String nomMesure) {
         super();
         this.nameMesure = nomMesure;
     }

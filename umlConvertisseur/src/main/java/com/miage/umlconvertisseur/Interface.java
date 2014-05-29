@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class Interface {
 
-    static List<Mesure> listMeasure = Convertisseur.listMeasure;
+    static List<Grandeur> listMeasure = Convertisseur.listMeasure;
     
     
     public static void main(String[] args) throws IOException {
@@ -101,7 +101,7 @@ public class Interface {
         Scanner s = new Scanner(System.in);
         // On recupere la reponse
         String nomMesure = s.next().trim();
-            for (Mesure mes : listMeasure){
+            for (Grandeur mes : listMeasure){
         	if (mes.getNomMesure().endsWith(nomMesure)){
         	    afficherUniteDeMesure(mes);
         	}
@@ -240,9 +240,9 @@ public class Interface {
     }
     
     /////////////////////////////////////////////////////////////////////////////
-    // Afficher Mesure // Afficher Mesure&Unite // Afficher unité d'une mesure //
+    // Afficher Grandeur // Afficher Grandeur&Unite // Afficher unité d'une mesure //
     // //////////////////////////////////////////////////////////////////////////
-    private static void afficherMesureEtUnite(List<Mesure> listeMesure) {
+    private static void afficherMesureEtUnite(List<Grandeur> listeMesure) {
         for (int i = 0; i < listeMesure.size(); i++) {
             System.out.println("   > " + listeMesure.get(i).getNomMesure());
             for (int j = 0; j < listeMesure.get(i).getLstUnite().size(); j++) {
@@ -258,13 +258,13 @@ public class Interface {
         }
     }
 
-    private static void afficherMesure(List<Mesure> listeMesure) {
-        for (Mesure mesure : listeMesure) {
+    private static void afficherMesure(List<Grandeur> listeMesure) {
+        for (Grandeur mesure : listeMesure) {
             System.out.println("   > " + mesure.getNomMesure());
         }
     }
     
-    private static void afficherUniteDeMesure(Mesure mesure){
+    private static void afficherUniteDeMesure(Grandeur mesure){
 	for (Unite unite : mesure.getLstUnite()){
 	    System.out.println("   > " + unite.getNomUnite());
 	}
