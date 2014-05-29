@@ -15,6 +15,11 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+/**
+ * @author Antoine
+ * 
+ *
+ */
 public class Convertisseur {
 
     // initialise la liste des mesures depuis le fichier XML
