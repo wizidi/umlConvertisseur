@@ -2,22 +2,22 @@ package com.miage.umlconvertisseur;
 
 import java.util.List;
 
-public class CategorieUnite {
+public class CategorieUnit {
 
     public String nameCategorieUnite;
     public List<Unit> listUnit;
 
-    public CategorieUnite() {
+    public CategorieUnit() {
         super();
     }
 
-    public CategorieUnite(String name, List<Unit> lstUnite) {
+    public CategorieUnit(String name, List<Unit> lstUnite) {
         super();
         this.nameCategorieUnite = name;
         this.listUnit = lstUnite;
     }
 
-    public CategorieUnite(String nameCategorieUnite) {
+    public CategorieUnit(String nameCategorieUnite) {
         super();
         this.nameCategorieUnite = nameCategorieUnite;
     }

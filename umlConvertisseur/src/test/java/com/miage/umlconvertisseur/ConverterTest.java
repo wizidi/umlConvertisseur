@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
-public class ConvertisseurTest {
+public class ConverterTest {
 
     @Test
     public void test() {

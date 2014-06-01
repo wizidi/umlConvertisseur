@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class Interface {
 
-    static List<CategorieUnite> listMeasure = Converter.listMeasure;
+    static List<CategorieUnit> listMeasure = Converter.listMeasure;
     
     
     public static void main(String[] args) throws IOException {
@@ -101,7 +101,7 @@ public class Interface {
         Scanner s = new Scanner(System.in);
         // On recupere la reponse
         String nomMesure = s.next().trim();
-            for (CategorieUnite mes : listMeasure){
+            for (CategorieUnit mes : listMeasure){
         	if (mes.getNameCategorieUnite().endsWith(nomMesure)){
         	    afficherUniteDeMesure(mes);
         	}
@@ -240,9 +240,9 @@ public class Interface {
     }
     
     /////////////////////////////////////////////////////////////////////////////
-    // Afficher CategorieUnite // Afficher CategorieUnite&Unit // Afficher unité d'une categorieUnite //
+    // Afficher CategorieUnit // Afficher CategorieUnit&Unit // Afficher unité d'une categorieUnite //
     // //////////////////////////////////////////////////////////////////////////
-    private static void afficherMesureEtUnite(List<CategorieUnite> listeMesure) {
+    private static void afficherMesureEtUnite(List<CategorieUnit> listeMesure) {
         for (int i = 0; i < listeMesure.size(); i++) {
             System.out.println("   > " + listeMesure.get(i).getNameCategorieUnite());
             for (int j = 0; j < listeMesure.get(i).getLstUnite().size(); j++) {
@@ -258,14 +258,14 @@ public class Interface {
         }
     }
 
-    private static void afficherMesure(List<CategorieUnite> listeMesure) {
-        for (CategorieUnite categorieUnite : listeMesure) {
-            System.out.println("   > " + categorieUnite.getNameCategorieUnite());
+    private static void afficherMesure(List<CategorieUnit> listeMesure) {
+        for (CategorieUnit categorieUnit : listeMesure) {
+            System.out.println("   > " + categorieUnit.getNameCategorieUnite());
         }
     }
     
-    private static void afficherUniteDeMesure(CategorieUnite categorieUnite){
-	for (Unit unit : categorieUnite.getLstUnite()){
+    private static void afficherUniteDeMesure(CategorieUnit categorieUnit){
+	for (Unit unit : categorieUnit.getLstUnite()){
 	    System.out.println("   > " + unit.getNameUnite());
 	}
     }

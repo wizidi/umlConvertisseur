@@ -24,7 +24,7 @@ public class Converter {
 
     // initialise la liste des categorieUnites depuis le fichier XML
     // initializes the list of measures from the XML file
-    public static List<CategorieUnite> listMeasure = initialiserListCategorieUnite();
+    public static List<CategorieUnit> listMeasure = initialiserListCategorieUnite();
 
     public static BigDecimal convertTwoUnit(String categorieUnite, String nameUniteIn,
 	    String nameUniteOut, BigDecimal valueIn) {
@@ -103,10 +103,10 @@ public class Converter {
     // ////////////////////////////
     // Initialiser list categorieUnite //
     // ////////////////////////////
-    private static List<CategorieUnite> initialiserListCategorieUnite() {
+    private static List<CategorieUnit> initialiserListCategorieUnite() {
 	// Objectif, recuperer la liste des differentes categorieUnites, contenant elles meme les differentes unites
 	// Objective, retrieve a list of different measures, they even contain the different units
-	List<CategorieUnite> listeCategorieUnite = new ArrayList<CategorieUnite>();
+	List<CategorieUnit> listeCategorieUnite = new ArrayList<CategorieUnit>();
 
 	// On recupere les donnees du fichier XML situe ici
 	// The data from the XML file is recovered is here
@@ -191,13 +191,13 @@ public class Converter {
 
 	    // a chaque fois que l'on trouve une categorieUnite on cree un objet categorieUnite
 	    // every time we find a measure a measure object is created
-	    CategorieUnite categorieUnite = new CategorieUnite();
-	    categorieUnite.setNameCategorieUnite(attribut);
-	    categorieUnite.setLstUnite(lstUnite);
+	    CategorieUnit categorieUnit = new CategorieUnit();
+	    categorieUnit.setNameCategorieUnite(attribut);
+	    categorieUnit.setLstUnite(lstUnite);
 
 	    // On ajoute cette categorieUnite a notre liste de categorieUnite
 	    // This measurement is added to our list of measurement
-	    listeCategorieUnite.add(categorieUnite);
+	    listeCategorieUnite.add(categorieUnit);
 	}
 
 	return listeCategorieUnite;
@@ -270,7 +270,7 @@ public class Converter {
 	    System.out
 	    .print("\n   Suppression de " + nameUnite + " impossible ");
 	    if (!validCategorieUnite) {
-		System.out.println("car la CategorieUnite " + nameCategorieUnite
+		System.out.println("car la CategorieUnit " + nameCategorieUnite
 			+ " n'existe pas ");
 	    }
 	} else {
