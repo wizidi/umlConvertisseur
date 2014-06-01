@@ -15,15 +15,15 @@ public class Unite {
         super();
     }
 
-    public Unite(String nomUnite, BigDecimal multiParRapportDefaut,
+    public Unite(String nameUnite, BigDecimal multiParRapportDefaut,
                  BigDecimal additionParRapportDefaut) {
         super();
-        this.nameUnite = nomUnite;
+        this.nameUnite = nameUnite;
         this.multiplication = multiParRapportDefaut;
         this.addition = additionParRapportDefaut;
     }
 
-    public String getNomUnite() {
+    public String getNameUnite() {
         return nameUnite;
     }
 

@@ -247,7 +247,7 @@ public class Interface {
             System.out.println("   > " + listeMesure.get(i).getNameCategorieUnite());
             for (int j = 0; j < listeMesure.get(i).getLstUnite().size(); j++) {
                 System.out.println("     - "
-                        + listeMesure.get(i).getLstUnite().get(j).getNomUnite()
+                        + listeMesure.get(i).getLstUnite().get(j).getNameUnite()
                         + "   | multi : "
                         + listeMesure.get(i).getLstUnite().get(j)
                         .getmultiParRapportDefaut()
@@ -266,7 +266,7 @@ public class Interface {
     
     private static void afficherUniteDeMesure(CategorieUnite categorieUnite){
 	for (Unite unite : categorieUnite.getLstUnite()){
-	    System.out.println("   > " + unite.getNomUnite());
+	    System.out.println("   > " + unite.getNameUnite());
 	}
     }
 }

@@ -26,12 +26,12 @@ public class Convertisseur {
     // initializes the list of measures from the XML file
     public static List<CategorieUnite> listMeasure = initialiserListCategorieUnite();
 
-    public static BigDecimal convertirDeuxUnite(String categorieUnite, String nomUniteIn,
-	    String nomUniteOut, BigDecimal valeurIn) {
+    public static BigDecimal convertirDeuxUnite(String categorieUnite, String nameUniteIn,
+	    String nameUniteOut, BigDecimal valueIn) {
 
-	// On cherche la valeur de la l'unite OUT
+	// On cherche la value de la l'unite OUT
 	// The value of the unity we seek OUT
-	BigDecimal valeurOut = new BigDecimal("0");
+	BigDecimal valueOut = new BigDecimal("0");
 
 	// On initialise les variables qui vont nous servir a realiser les calculs
 	// We initialize variables that will serve us realize calculations
@@ -46,14 +46,14 @@ public class Convertisseur {
 	// On va se placer dans la bonne categorieUnite pour recuperer multi et addition
 	// It will be placed in good measure to recover the multiplier and adding
 	for (int i = 0; i < listMeasure.size(); i++) {
-	    // Si le nom de la categorieUnite existe
+	    // Si le name de la categorieUnite existe
 	    if (listMeasure.get(i).getNameCategorieUnite().equals(categorieUnite)) {
 		// On va chercher les deux unites
 		// If the name of the measure are
 		for (int j = 0; j < listMeasure.get(i).getLstUnite().size(); j++) {
 		    // IN
-		    if (listMeasure.get(i).getLstUnite().get(j).getNomUnite()
-			    .equals(nomUniteIn)) {
+		    if (listMeasure.get(i).getLstUnite().get(j).getNameUnite()
+			    .equals(nameUniteIn)) {
 			multiIn = listMeasure.get(i).getLstUnite().get(j)
 				.getmultiParRapportDefaut();
 			additionIn = listMeasure.get(i).getLstUnite().get(j)
@@ -61,8 +61,8 @@ public class Convertisseur {
 			in = false;
 		    }
 		    // OUT
-		    if (listMeasure.get(i).getLstUnite().get(j).getNomUnite()
-			    .equals(nomUniteOut)) {
+		    if (listMeasure.get(i).getLstUnite().get(j).getNameUnite()
+			    .equals(nameUniteOut)) {
 			multiOut = listMeasure.get(i).getLstUnite().get(j)
 				.getmultiParRapportDefaut();
 			additionOut = listMeasure.get(i).getLstUnite().get(j)
@@ -74,11 +74,11 @@ public class Convertisseur {
 	}
 
 	if (in) {
-	    System.out.println("  \n   L'unite " + nomUniteIn + " est introuvable, la conversion est donc impossible");
+	    System.out.println("  \n   L'unite " + nameUniteIn + " est introuvable, la conversion est donc impossible");
 	}
 
 	if (out) {
-	    System.out.println("  \n   L'unite " + nomUniteOut + " est introuvable, la conversion est donc impossible");
+	    System.out.println("  \n   L'unite " + nameUniteOut + " est introuvable, la conversion est donc impossible");
 	}
 
 	// On teste si <> de 0
@@ -87,15 +87,15 @@ public class Convertisseur {
 
 	    // Etape 1, tranformer en unite de base (exemple : 1km en m :  1 * 1000 (multi km)= 1000m)
 	    // Step 2, tranformer in base unit (eg 1km m: 1 * 1000 (multi km) = 1000m)
-	    BigDecimal valBase = valeurIn.multiply(multiIn).add(additionIn);
+	    BigDecimal valBase = valueIn.multiply(multiIn).add(additionIn);
 
 	    // Etape 2, transformer en unite out
 	    // Step 2, into unit out
-	    valeurOut = (valBase.subtract(additionOut)).divide(multiOut, 3, BigDecimal.ROUND_HALF_UP);
+	    valueOut = (valBase.subtract(additionOut)).divide(multiOut, 3, BigDecimal.ROUND_HALF_UP);
 
-	    System.out.println("  " + valeurIn + " " + nomUniteIn + " = " + valeurOut + " " + nomUniteOut);
+	    System.out.println("  " + valueIn + " " + nameUniteIn + " = " + valueOut + " " + nameUniteOut);
 	}
-	return valeurOut;
+	return valueOut;
     }
 
 
@@ -148,10 +148,10 @@ public class Convertisseur {
 	    // we recovered our measure
 	    Element oneCategorieUnite = (Element) lstCategorieUniteXml.item(i);
 	    
-	    // On recupere le nom de la categorieUnite
+	    // On recupere le name de la categorieUnite
 	    // We recovered the name of the measure
 	    String attribut = lstCategorieUniteXml.item(i).getAttributes()
-		    .getNamedItem("nomCategorieUnite").getTextContent();
+		    .getNamedItem("nameCategorieUnite").getTextContent();
 
 	    // On recupere la liste des unites
 	    // It recovers the list of units
@@ -165,10 +165,10 @@ public class Convertisseur {
 	    // For each unit in the list
 	    int lstUnitLength = lstUnit.getLength();
 	    for (int j = 0; j < lstUnitLength; j++) {
-		// on recupere le nom
+		// on recupere le name
 		// we recovered the name
-		String nomUnite = lstUnit.item(j).getAttributes()
-			.getNamedItem("nomUnite").getTextContent();
+		String nameUnite = lstUnit.item(j).getAttributes()
+			.getNamedItem("nameUnite").getTextContent();
 		// on recupere le multi et l'addition, en string, donc le parse
 		// multi and addition is recovered in string, so the parse
 		String multi = lstUnit.item(j).getAttributes()
@@ -180,7 +180,7 @@ public class Convertisseur {
 
 		// on cree un objet unite avec ces informations
 		// we created a unit object with this information
-		Unite unite = new Unite(nomUnite, multiBigDecimal,
+		Unite unite = new Unite(nameUnite, multiBigDecimal,
 			additionBigDecimal);
 
 		// on ajoute l'unite a la liste de unite de la categorieUnite
@@ -206,42 +206,42 @@ public class Convertisseur {
     // /////////////////
     // Ajouter // ADD //
     // /////////////////
-    public static void ajouterUnite(String nomCategorieUnite, String nomUnite,
+    public static void ajouterUnite(String nameCategorieUnite, String nameUnite,
 	    BigDecimal multiUnite, BigDecimal additionUnite) {
 
 	// on cree un objet unite avec ces informations
 	// We created a unit object with this information
-	Unite unite = new Unite(nomUnite, multiUnite, additionUnite);
+	Unite unite = new Unite(nameUnite, multiUnite, additionUnite);
 
 	boolean doublon = false;
 	boolean categorieUniteExiste = false;
 
 	for (int i = 0; i < listMeasure.size(); i++) {
-	    if (listMeasure.get(i).getNameCategorieUnite().equals(nomCategorieUnite)) {
+	    if (listMeasure.get(i).getNameCategorieUnite().equals(nameCategorieUnite)) {
 		categorieUniteExiste = true;
 		for (int j = 0; j < listMeasure.get(i).getLstUnite().size(); j++) {
-		    if (listMeasure.get(i).getLstUnite().get(j).getNomUnite()
-			    .equals(nomUnite)) {
+		    if (listMeasure.get(i).getLstUnite().get(j).getNameUnite()
+			    .equals(nameUnite)) {
 			doublon = true;
 		    }
 		}
 		if (!doublon) {
 		    listMeasure.get(i).getLstUnite().add(unite);
 		} else {
-		    System.out.print(" \n   Impossible d'ajouter " + nomUnite
-			    + ", cette unite existe deja dans " + nomCategorieUnite
+		    System.out.print(" \n   Impossible d'ajouter " + nameUnite
+			    + ", cette unite existe deja dans " + nameCategorieUnite
 			    + " ! \n");
 		}
 	    }
 	}
 	if (!categorieUniteExiste) {
 	    System.out
-	    .print(" \n   La categorieUnite " + nomCategorieUnite
-		    + " n'existe pas. Ajoute de " + nomUnite
+	    .print(" \n   La categorieUnite " + nameCategorieUnite
+		    + " n'existe pas. Ajoute de " + nameUnite
 		    + " impossible \n");
 	}
 	if (!doublon && categorieUniteExiste) {
-	    System.out.println(" \n  Ajout de l'unite " + nomUnite + " effectue ");
+	    System.out.println(" \n  Ajout de l'unite " + nameUnite + " effectue ");
 	    enregistrerInXML();
 	}
 
@@ -250,14 +250,14 @@ public class Convertisseur {
     // ////////////
     // Supprimer //
     // ////////////
-    public static void supprimerUnite(String nomCategorieUnite, String nomUnite) {
+    public static void supprimerUnite(String nameCategorieUnite, String nameUnite) {
 	boolean validUnite = false;
 	boolean validCategorieUnite = false;
 	for (int i = 0; i < listMeasure.size(); i++) {
-	    if (listMeasure.get(i).getNameCategorieUnite().equals(nomCategorieUnite)) {
+	    if (listMeasure.get(i).getNameCategorieUnite().equals(nameCategorieUnite)) {
 		for (int j = 0; j < listMeasure.get(i).getLstUnite().size(); j++) {
-		    if (listMeasure.get(i).getLstUnite().get(j).getNomUnite()
-			    .equals(nomUnite)) {
+		    if (listMeasure.get(i).getLstUnite().get(j).getNameUnite()
+			    .equals(nameUnite)) {
 			listMeasure.get(i).getLstUnite().remove(j);
 			validUnite = true;
 		    }
@@ -268,14 +268,14 @@ public class Convertisseur {
 	}
 	if (!validUnite) {
 	    System.out
-	    .print("\n   Suppression de " + nomUnite + " impossible ");
+	    .print("\n   Suppression de " + nameUnite + " impossible ");
 	    if (!validCategorieUnite) {
-		System.out.println("car la CategorieUnite " + nomCategorieUnite
+		System.out.println("car la CategorieUnite " + nameCategorieUnite
 			+ " n'existe pas ");
 	    }
 	} else {
 	    System.out
-	    .println("\n  Suppression de " + nomUnite + " effectue ");
+	    .println("\n  Suppression de " + nameUnite + " effectue ");
 	    enregistrerInXML();
 	}
     }
@@ -290,13 +290,13 @@ public class Convertisseur {
 	    Writer w = new FileWriter(fic);
 	    String reecritureDansLeFichier = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><umlConvertisseur>";
 	    for (int i = 0; i < listMeasure.size(); i++) {
-		reecritureDansLeFichier += "<categorieUnite nomCategorieUnite=\""
+		reecritureDansLeFichier += "<categorieUnite nameCategorieUnite=\""
 			+ listMeasure.get(i).getNameCategorieUnite()+ "\">";
 		for (int j = 0; j < listMeasure.get(i).getLstUnite().size(); j++) {
 
 		    Unite unitCourant = listMeasure.get(i).getLstUnite().get(j);
-		    reecritureDansLeFichier += "<unite nomUnite=\""
-			    + unitCourant.getNomUnite() + "\" multi=\""
+		    reecritureDansLeFichier += "<unite nameUnite=\""
+			    + unitCourant.getNameUnite() + "\" multi=\""
 			    + unitCourant.getmultiParRapportDefaut()
 			    + "\" addition=\""
 			    + unitCourant.getadditionParRapportDefaut()
