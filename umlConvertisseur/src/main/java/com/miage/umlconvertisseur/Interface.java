@@ -139,7 +139,7 @@ public class Interface {
         // On recupere la reponse
         String nomUniteOut = sca.next().trim();
 
-        Converter.convertirDeuxUnite(nomMesure, nomUniteIn,
+        Converter.convertTwoUnit(nomMesure, nomUniteIn,
                 nomUniteOut, valIn);
 
     }

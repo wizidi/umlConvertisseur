@@ -26,7 +26,7 @@ public class Converter {
     // initializes the list of measures from the XML file
     public static List<CategorieUnite> listMeasure = initialiserListCategorieUnite();
 
-    public static BigDecimal convertirDeuxUnite(String categorieUnite, String nameUniteIn,
+    public static BigDecimal convertTwoUnit(String categorieUnite, String nameUniteIn,
 	    String nameUniteOut, BigDecimal valueIn) {
 
 	// On cherche la value de la l'unite OUT
