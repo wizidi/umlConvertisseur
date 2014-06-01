@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class Interface {
 
-    static List<CategorieUnite> listMeasure = Convertisseur.listMeasure;
+    static List<CategorieUnite> listMeasure = Converter.listMeasure;
     
     
     public static void main(String[] args) throws IOException {
@@ -28,13 +28,13 @@ public class Interface {
             System.out
                     .println("                                                              ");
             System.out
-                    .println("                 Convertisseur d'unite                        ");
+                    .println("                 Converter d'unite                        ");
             System.out
                     .println("                                                              ");
             System.out
                     .println("    1) Afficher toutes les categories d'unites                ");
             System.out
-                    .println("    2) Afficher toutes les categories d'unites et leurs unite ");
+                    .println("    2) Afficher toutes les categories d'unites et leurs unites");
             System.out
                     .println("    3) Convertir deux unites                                  ");
             System.out
@@ -139,7 +139,7 @@ public class Interface {
         // On recupere la reponse
         String nomUniteOut = sca.next().trim();
 
-        Convertisseur.convertirDeuxUnite(nomMesure, nomUniteIn,
+        Converter.convertirDeuxUnite(nomMesure, nomUniteIn,
                 nomUniteOut, valIn);
 
     }
@@ -162,7 +162,7 @@ public class Interface {
         // On recupere la reponse
         String nomUnite = scan.next().trim();
 
-        Convertisseur.supprimerUnite(nomMesure, nomUnite);
+        Converter.deleteUnit(nomMesure, nomUnite);
     }
 
     private static void ajouterUniteToMesure() throws IOException {
@@ -234,13 +234,13 @@ public class Interface {
 
         if (okDecal && okmulti) {
 
-            Convertisseur.ajouterUnite(nomMesure, nomUnite, ratUnite, decal);
+            Converter.addUnit(nomMesure, nomUnite, ratUnite, decal);
         }
 
     }
     
     /////////////////////////////////////////////////////////////////////////////
-    // Afficher CategorieUnite // Afficher CategorieUnite&Unite // Afficher unité d'une categorieUnite //
+    // Afficher CategorieUnite // Afficher CategorieUnite&Unit // Afficher unité d'une categorieUnite //
     // //////////////////////////////////////////////////////////////////////////
     private static void afficherMesureEtUnite(List<CategorieUnite> listeMesure) {
         for (int i = 0; i < listeMesure.size(); i++) {
@@ -265,8 +265,8 @@ public class Interface {
     }
     
     private static void afficherUniteDeMesure(CategorieUnite categorieUnite){
-	for (Unite unite : categorieUnite.getLstUnite()){
-	    System.out.println("   > " + unite.getNameUnite());
+	for (Unit unit : categorieUnite.getLstUnite()){
+	    System.out.println("   > " + unit.getNameUnite());
 	}
     }
 }

@@ -2,33 +2,33 @@ package com.miage.umlconvertisseur;
 
 import java.math.BigDecimal;
 
-public class Unite {
+public class Unit {
 
-    // Nom de l'unit�, par exemple cm
-    public String nameUnite;
-    // multi de multiplication de l'unit�, par exemple 1,30
+    // Nom de l'unite, par exemple cm
+    public String nameUnit;
+    // coefficient de multiplication de l'unite, par exemple 1,30
     public BigDecimal multiplication;
-    // D�callage � r�aliser (addition), par exemple 30
+    // Decallage a realiser (addition), par exemple 30
     public BigDecimal addition;
 
-    public Unite() {
+    public Unit() {
         super();
     }
 
-    public Unite(String nameUnite, BigDecimal multiParRapportDefaut,
+    public Unit(String nameUnite, BigDecimal multiParRapportDefaut,
                  BigDecimal additionParRapportDefaut) {
         super();
-        this.nameUnite = nameUnite;
+        this.nameUnit = nameUnite;
         this.multiplication = multiParRapportDefaut;
         this.addition = additionParRapportDefaut;
     }
 
     public String getNameUnite() {
-        return nameUnite;
+        return nameUnit;
     }
 
     public void setNomUnite(String nomUnite) {
-        this.nameUnite = nomUnite;
+        this.nameUnit = nomUnite;
     }
 
     public BigDecimal getmultiParRapportDefaut() {

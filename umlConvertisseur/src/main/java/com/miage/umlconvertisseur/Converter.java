@@ -20,7 +20,7 @@ import org.xml.sax.SAXException;
  * 
  *
  */
-public class Convertisseur {
+public class Converter {
 
     // initialise la liste des categorieUnites depuis le fichier XML
     // initializes the list of measures from the XML file
@@ -159,7 +159,7 @@ public class Convertisseur {
 
 	    // on cree la liste des unites de la categorieUnite
 	    // we created a list of units of measurement
-	    List<Unite> lstUnite = new ArrayList<Unite>();
+	    List<Unit> lstUnite = new ArrayList<Unit>();
 
 	    // Pour chaque unite de la liste
 	    // For each unit in the list
@@ -180,12 +180,12 @@ public class Convertisseur {
 
 		// on cree un objet unite avec ces informations
 		// we created a unit object with this information
-		Unite unite = new Unite(nameUnite, multiBigDecimal,
+		Unit unit = new Unit(nameUnite, multiBigDecimal,
 			additionBigDecimal);
 
 		// on ajoute l'unite a la liste de unite de la categorieUnite
 		// unit is added to the list of units of measurement
-		lstUnite.add(unite);
+		lstUnite.add(unit);
 
 	    }
 
@@ -206,12 +206,12 @@ public class Convertisseur {
     // /////////////////
     // Ajouter // ADD //
     // /////////////////
-    public static void ajouterUnite(String nameCategorieUnite, String nameUnite,
+    public static void addUnit(String nameCategorieUnite, String nameUnite,
 	    BigDecimal multiUnite, BigDecimal additionUnite) {
 
 	// on cree un objet unite avec ces informations
 	// We created a unit object with this information
-	Unite unite = new Unite(nameUnite, multiUnite, additionUnite);
+	Unit unit = new Unit(nameUnite, multiUnite, additionUnite);
 
 	boolean doublon = false;
 	boolean categorieUniteExiste = false;
@@ -226,7 +226,7 @@ public class Convertisseur {
 		    }
 		}
 		if (!doublon) {
-		    listMeasure.get(i).getLstUnite().add(unite);
+		    listMeasure.get(i).getLstUnite().add(unit);
 		} else {
 		    System.out.print(" \n   Impossible d'ajouter " + nameUnite
 			    + ", cette unite existe deja dans " + nameCategorieUnite
@@ -250,7 +250,7 @@ public class Convertisseur {
     // ////////////
     // Supprimer //
     // ////////////
-    public static void supprimerUnite(String nameCategorieUnite, String nameUnite) {
+    public static void deleteUnit(String nameCategorieUnite, String nameUnite) {
 	boolean validUnite = false;
 	boolean validCategorieUnite = false;
 	for (int i = 0; i < listMeasure.size(); i++) {
@@ -294,8 +294,8 @@ public class Convertisseur {
 			+ listMeasure.get(i).getNameCategorieUnite()+ "\">";
 		for (int j = 0; j < listMeasure.get(i).getLstUnite().size(); j++) {
 
-		    Unite unitCourant = listMeasure.get(i).getLstUnite().get(j);
-		    reecritureDansLeFichier += "<unite nameUnite=\""
+		    Unit unitCourant = listMeasure.get(i).getLstUnite().get(j);
+		    reecritureDansLeFichier += "<unite nameUnit=\""
 			    + unitCourant.getNameUnite() + "\" multi=\""
 			    + unitCourant.getmultiParRapportDefaut()
 			    + "\" addition=\""

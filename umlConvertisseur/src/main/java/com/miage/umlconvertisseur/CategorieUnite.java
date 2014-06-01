@@ -5,13 +5,13 @@ import java.util.List;
 public class CategorieUnite {
 
     public String nameCategorieUnite;
-    public List<Unite> listUnit;
+    public List<Unit> listUnit;
 
     public CategorieUnite() {
         super();
     }
 
-    public CategorieUnite(String name, List<Unite> lstUnite) {
+    public CategorieUnite(String name, List<Unit> lstUnite) {
         super();
         this.nameCategorieUnite = name;
         this.listUnit = lstUnite;
@@ -30,11 +30,11 @@ public class CategorieUnite {
         this.nameCategorieUnite = nameCategorieUnite;
     }
 
-    public List<Unite> getLstUnite() {
+    public List<Unit> getLstUnite() {
         return listUnit;
     }
 
-    public void setLstUnite(List<Unite> lstUnite) {
+    public void setLstUnite(List<Unit> lstUnite) {
         this.listUnit = lstUnite;
     }
 
