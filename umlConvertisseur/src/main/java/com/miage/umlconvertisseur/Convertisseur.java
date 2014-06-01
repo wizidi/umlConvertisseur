@@ -136,7 +136,7 @@ public class Convertisseur {
 
 	// On recupere la liste des categorieUnites
 	// It recovers the list of measures
-	NodeList lstCategorieUniteXml = racineFichierXml.getElementsByTagName("categorieUnite");
+	NodeList lstCategorieUniteXml = racineFichierXml.getElementsByTagName("categorieUnit");
 
 	// Pour chaque categorieUnite, on recupere l'ensemble des unit de la liste
 	// For each measure, we recovered all the unit list
@@ -151,11 +151,11 @@ public class Convertisseur {
 	    // On recupere le name de la categorieUnite
 	    // We recovered the name of the measure
 	    String attribut = lstCategorieUniteXml.item(i).getAttributes()
-		    .getNamedItem("nameCategorieUnite").getTextContent();
+		    .getNamedItem("nameCategorieUnit").getTextContent();
 
 	    // On recupere la liste des unites
 	    // It recovers the list of units
-	    NodeList lstUnit = oneCategorieUnite.getElementsByTagName("unite");
+	    NodeList lstUnit = oneCategorieUnite.getElementsByTagName("unit");
 
 	    // on cree la liste des unites de la categorieUnite
 	    // we created a list of units of measurement
@@ -168,7 +168,7 @@ public class Convertisseur {
 		// on recupere le name
 		// we recovered the name
 		String nameUnite = lstUnit.item(j).getAttributes()
-			.getNamedItem("nameUnite").getTextContent();
+			.getNamedItem("nameUnit").getTextContent();
 		// on recupere le multi et l'addition, en string, donc le parse
 		// multi and addition is recovered in string, so the parse
 		String multi = lstUnit.item(j).getAttributes()
