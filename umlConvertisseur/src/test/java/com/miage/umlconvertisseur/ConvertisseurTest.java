@@ -13,17 +13,23 @@ public class ConvertisseurTest {
         // TEST UNITAIRE //
         ///////////////////
         //////////////////////////////////////
-        // Ajouter unit� qui existe deja //
+        // Ajouter unite qui existe deja //
         //////////////////////////////////////
         Convertisseur.ajouterUnite("distance", "cm", new BigDecimal("120"), new BigDecimal("120"));
 
         ////////////////////////////////////////////////////////
-        // Ajouter une unit� dans une mesure qui n'�xiste pas //
+        // Ajouter une unite dans une mesure qui n'existe pas //
         ////////////////////////////////////////////////////////
         Convertisseur.ajouterUnite("toto", "cm", new BigDecimal("120"), new BigDecimal("120"));
 
+        // Supprimer une unite qui n'existe pas
+        Convertisseur.supprimerUnite("distance", "toto");
+        
+        // Supprimer une unite qui n'existe pas et dont la categorie d'existe pas
+        Convertisseur.supprimerUnite("toto", "toto");
+
         //////////////////////////////////////
-        // Convertir unit� qui n'�xiste pas //
+        // Convertir unite qui n'existe pas //
         //////////////////////////////////////
         // distance : 1toto = 2tata
         @SuppressWarnings("unused")
@@ -32,7 +38,7 @@ public class ConvertisseurTest {
         ///////////////
         // Convertir //
         ///////////////
-        // distance, valeur par d�faut : m
+        // distance, valeur par defaut : m
         System.out.println("\n distance");
         // distance : 100cm = 1m
         BigDecimal valeurInCmToM = new BigDecimal("100");
@@ -73,9 +79,9 @@ public class ConvertisseurTest {
         /////////////
         // Ajouter //
         /////////////
-        // Cr�ation d'une nouvelle unit�e dans la mesure "distance" : le mille marin.
-        // L'unit� de r�f�rence de Mesure c'est le metre
-        // 1 mille marin est �gal � 1852m. Il n'y a pas de d�calage
+        // Creation d'une nouvelle unitee dans la mesure "distance" : le mille marin.
+        // L'unite de reference de Mesure c'est le metre
+        // 1 mille marin est egal a 1852m. Il n'y a pas de decalage
         Convertisseur.ajouterUnite("distance", "milleMarin", new BigDecimal("1852.00"), new BigDecimal("0.0"));
 
         // Test de la convertion
@@ -159,10 +165,10 @@ public class ConvertisseurTest {
 
         Convertisseur.supprimerUnite("poids", "kg");
 
-        // Cr�ation d'une nouvelle unit�e dans la mesure "poids" : Kilo.
-        // L'unit� de r�f�rence de Mesure c'est le gramme
-        // 1 kg = 1000.000 g. Il n'y a pas de d�calage
-        // Si le kg �xite d�j�, message d'erreur
+        // Creation d'une nouvelle unitee dans la mesure "poids" : Kilo.
+        // L'unite de reference de Mesure c'est le gramme
+        // 1 kg = 1000.000 g. Il n'y a pas de decalage
+        // Si le kg exite deje, message d'erreur
         Convertisseur.ajouterUnite("poids", "kg", new BigDecimal("1000.00"), new BigDecimal("0.0"));
 
         // poids 1t = 1g
@@ -200,13 +206,13 @@ public class ConvertisseurTest {
 
         // surface
         System.out.println("\n surface");
-        // surface 1m� = 1.196 yd�
+        // surface 1me = 1.196 yde
         BigDecimal valeurInM2ToYd2 = new BigDecimal("1");
         BigDecimal valeurOutAttenduM2ToYd2 = new BigDecimal("1.196");
         BigDecimal resultValeurOutM2ToYd2 = Convertisseur.convertirDeuxUnite("surface", "m2", "yd2", valeurInM2ToYd2);
         assertEquals(valeurOutAttenduM2ToYd2, resultValeurOutM2ToYd2);
 
-        // surface : 1 yd� = 0.836 m�
+        // surface : 1 yde = 0.836 m
         BigDecimal valeurInYd2ToM2 = new BigDecimal("1");
         BigDecimal valeurOutAttenduYd2ToM2 = new BigDecimal("0.836");
         BigDecimal resultValeurOutYd2ToM2 = Convertisseur.convertirDeuxUnite("surface", "yd2", "m2", valeurInYd2ToM2);
