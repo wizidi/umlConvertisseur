@@ -16,7 +16,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 /**
- * @author Antoine
+ * @author Antoine and Alexandre
  * 
  *
  */
@@ -31,14 +31,14 @@ public class Converter {
 
 	// On cherche la value de la l'unite OUT
 	// The value of the unity we seek OUT
-	BigDecimal valueOut = new BigDecimal("0");
+	BigDecimal valueOut = BigDecimal.ZERO;
 
 	// On initialise les variables qui vont nous servir a realiser les calculs
 	// We initialize variables that will serve us realize calculations
-	BigDecimal multiIn = new BigDecimal("0");
-	BigDecimal multiOut = new BigDecimal("0");
-	BigDecimal additionIn = new BigDecimal("0");
-	BigDecimal additionOut = new BigDecimal("0");
+	BigDecimal multiIn = BigDecimal.ZERO;
+	BigDecimal multiOut = BigDecimal.ZERO;
+	BigDecimal additionIn = BigDecimal.ZERO;
+	BigDecimal additionOut = BigDecimal.ZERO;
 
 	Boolean in = true;
 	Boolean out = true;
@@ -91,7 +91,7 @@ public class Converter {
 
 	    // Etape 2, transformer en unite out
 	    // Step 2, into unit out
-	    valueOut = (valBase.subtract(additionOut)).divide(multiOut, 3, BigDecimal.ROUND_HALF_UP);
+	    valueOut = valBase.subtract(additionOut).divide(multiOut, 3, BigDecimal.ROUND_HALF_UP);
 
 	    System.out.println("  " + valueIn + " " + nameUniteIn + " = " + valueOut + " " + nameUniteOut);
 	}
@@ -103,6 +103,12 @@ public class Converter {
     // ////////////////////////////
     // Initialiser list categorieUnite //
     // ////////////////////////////
+    /***
+     * 
+     * @param 
+     * @return List of CategorieUnit
+     * @
+     */
     private static List<CategorieUnit> initialiserListCategorieUnite() {
 	// Objectif, recuperer la liste des differentes categorieUnites, contenant elles meme les differentes unites
 	// Objective, retrieve a list of different measures, they even contain the different units
@@ -128,7 +134,7 @@ public class Converter {
 	    e.printStackTrace();
 	    System.exit(0);
 	
-	};
+	}
 
 	// On recupere la racine du fichier
 	// The root of the file it recovers
