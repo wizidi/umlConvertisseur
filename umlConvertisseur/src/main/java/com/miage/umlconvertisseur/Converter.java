@@ -16,6 +16,8 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 /**
+ * This class contains methods to convert Unit
+ * 
  * @author Antoine and Alexandre
  * 
  *
@@ -25,7 +27,15 @@ public class Converter {
     // initialise la liste des categorieUnites depuis le fichier XML
     // initializes the list of measures from the XML file
     public static List<CategorieUnit> listMeasure = initialiserListCategorieUnite();
-
+    /**
+     * This function is used to convert one unit to another
+     * 
+     * @param categorieUnite
+     * @param nameUniteIn
+     * @param nameUniteOut
+     * @param valueIn
+     * @return BigDecimal
+     */
     public static BigDecimal convertTwoUnit(String categorieUnite, String nameUniteIn,
 	    String nameUniteOut, BigDecimal valueIn) {
 
@@ -47,9 +57,10 @@ public class Converter {
 	// It will be placed in good measure to recover the multiplier and adding
 	for (int i = 0; i < listMeasure.size(); i++) {
 	    // Si le name de la categorieUnite existe
+            // If the name of categorieUnite are
 	    if (listMeasure.get(i).getNameCategorieUnite().equals(categorieUnite)) {
 		// On va chercher les deux unites
-		// If the name of the measure are
+		// We search the two units
 		for (int j = 0; j < listMeasure.get(i).getLstUnite().size(); j++) {
 		    // IN
 		    if (listMeasure.get(i).getLstUnite().get(j).getNameUnite()
@@ -104,10 +115,11 @@ public class Converter {
     // Initialiser list categorieUnite //
     // ////////////////////////////
     /***
+     * This function initialize liste of categories
      * 
      * @param 
      * @return List of CategorieUnit
-     * @
+     * 
      */
     private static List<CategorieUnit> initialiserListCategorieUnite() {
 	// Objectif, recuperer la liste des differentes categorieUnites, contenant elles meme les differentes unites
@@ -212,6 +224,14 @@ public class Converter {
     // /////////////////
     // Ajouter // ADD //
     // /////////////////
+    /**
+     * This procedure is to add a unit into list of measure
+     * 
+     * @param nameCategorieUnite
+     * @param nameUnite
+     * @param multiUnite
+     * @param additionUnite 
+     */
     public static void addUnit(String nameCategorieUnite, String nameUnite,
 	    BigDecimal multiUnite, BigDecimal additionUnite) {
 
@@ -256,6 +276,12 @@ public class Converter {
     // ////////////
     // Supprimer //
     // ////////////
+    /**
+     * This procedure is to delete a unit
+     * 
+     * @param nameCategorieUnite
+     * @param nameUnite 
+     */
     public static void deleteUnit(String nameCategorieUnite, String nameUnite) {
 	boolean validUnite = false;
 	boolean validCategorieUnite = false;
@@ -288,7 +314,11 @@ public class Converter {
 
     // /////////////////////////////////////////////////////// 
     // Enregistrer dans le fichier XML // Save the XML file // 
-    // /////////////////////////////////////////////////////// 
+    // ///////////////////////////////////////////////////////
+    /**
+     * This procedure is to save unit into XML file
+     * 
+     */
     public static void enregistrerInXML() {
 	String fichierXml = "src/stockage.xml";
 	File fic = new File(fichierXml);
