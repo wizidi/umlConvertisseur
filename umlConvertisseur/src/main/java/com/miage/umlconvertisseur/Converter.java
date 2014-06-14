@@ -26,7 +26,7 @@ public class Converter {
 
     // initialise la liste des categorieUnites depuis le fichier XML
     // initializes the list of measures from the XML file
-    public static List<CategorieUnit> listMeasure = initialiserListCategorieUnite();
+    public static List<CategorieUnit> listMeasure = initialiserListCategorieUnite("src/main/java/org/data/stockage.xml");
     /**
      * This function is used to convert one unit to another
      * 
@@ -121,15 +121,12 @@ public class Converter {
      * @return List of CategorieUnit
      * 
      */
-    private static List<CategorieUnit> initialiserListCategorieUnite() {
+    static List<CategorieUnit> initialiserListCategorieUnite(String fichierXml) {
 	// Objectif, recuperer la liste des differentes categorieUnites, contenant elles meme les differentes unites
 	// Objective, retrieve a list of different measures, they even contain the different units
 	List<CategorieUnit> listeCategorieUnite = new ArrayList<CategorieUnit>();
 
-	// On recupere les donnees du fichier XML situe ici
-	// The data from the XML file is recovered is here
-	String fichierXml = "src/main/java/org/data/stockage.xml";
-
+        
 	// Creation d'un document xml (hors du try)
 	// Creation of an xml documents (excluding try)
 	Document documentXML = null;
@@ -145,7 +142,6 @@ public class Converter {
 	} catch (SAXException | IOException | ParserConfigurationException e) {
 	    e.printStackTrace();
 	    System.exit(0);
-	
 	}
 
 	// On recupere la racine du fichier
@@ -301,15 +297,7 @@ public class Converter {
 	if (!validUnite) {
 	    System.out
 	    .print("\n   Suppression de " + nameUnite + " impossible ");
-	    if (!validCategorieUnite) {
-		System.out.println("car la CategorieUnit " + nameCategorieUnite
-			+ " n'existe pas ");
-	    }
-	} else {
-	    System.out
-	    .println("\n  Suppression de " + nameUnite + " effectue ");
-	    enregistrerInXML();
-	}
+	} 
     }
 
     // /////////////////////////////////////////////////////// 

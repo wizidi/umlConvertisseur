@@ -12,18 +12,18 @@ public class ScreenView {
     
     
     public static void main(String[] args) throws IOException {
-        initialiser();
+        start();
     }
 
     // /////// 
     // MENU //
     // ///////
-    /***
-     * @param 
-     * @return void
+    
+    /**
+     * Menu
      * @throws IOException 
      */
-    public static void initialiser() throws IOException {
+    public static void start() throws IOException {
 
         int reponseMenu = 0;
 
@@ -95,6 +95,10 @@ public class ScreenView {
         }
     }
     
+    /**
+     * Can convert two units
+     * Permet de convertir deux unités
+     */
     private static void convertir() {
 
         // Recup nomUniteIn
@@ -149,6 +153,10 @@ public class ScreenView {
 
     }
     
+    /**
+     * To remove a unit
+     * Permet de supprimer une unitée 
+     */
     private static void supprimerUnite() {
 
         System.out
@@ -170,6 +178,11 @@ public class ScreenView {
         Converter.deleteUnit(nomMesure, nomUnite);
     }
 
+    /**
+     * Adds a unit in a class categorieUnit
+     * Permet d'ajouter une unité dans une catégorie d'unités
+     * @throws IOException 
+     */
     private static void ajouterUniteToMesure() throws IOException {
 
         System.out.print(" \n  INFO : ");
@@ -247,7 +260,13 @@ public class ScreenView {
     /////////////////////////////////////////////////////////////////////////////
     // Afficher CategorieUnit // Afficher CategorieUnit&Unit // Afficher unité d'une categorieUnite //
     // //////////////////////////////////////////////////////////////////////////
-    private static void afficherMesureEtUnite(List<CategorieUnit> listeMesure) {
+    
+    /**
+     * Permet d'afficher l'ensemble des catégories d'unités et leurs unités
+     * Allows you to view all categories of units and units thereof
+     * @param listeMesure 
+     */
+    protected static void afficherMesureEtUnite(List<CategorieUnit> listeMesure) {
         for (int i = 0; i < listeMesure.size(); i++) {
             System.out.println("   > " + listeMesure.get(i).getNameCategorieUnite());
             for (int j = 0; j < listeMesure.get(i).getLstUnite().size(); j++) {
@@ -262,14 +281,24 @@ public class ScreenView {
             }
         }
     }
-
-    private static void afficherMesure(List<CategorieUnit> listeMesure) {
+    
+    /**
+     * Displays the list of measures of a class of unit
+     * Permet d'affiher la liste des mesures d'une catégorie d'unité
+     * @param listeMesure 
+     */
+    protected static void afficherMesure(List<CategorieUnit> listeMesure) {
         for (CategorieUnit categorieUnit : listeMesure) {
             System.out.println("   > " + categorieUnit.getNameCategorieUnite());
         }
     }
     
-    private static void afficherUniteDeMesure(CategorieUnit categorieUnit){
+    /***     
+     * Displays the list of categories of units
+     * Permet d'afficher la liste des categories d'unites
+     * @param categorieUnit 
+     */
+    protected static void afficherUniteDeMesure(CategorieUnit categorieUnit){
 	for (Unit unit : categorieUnit.getLstUnite()){
 	    System.out.println("   > " + unit.getNameUnite());
 	}

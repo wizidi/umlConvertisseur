@@ -1,6 +1,7 @@
 package com.miage.umlconvertisseur;
 
 import java.math.BigDecimal;
+import java.util.List;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
@@ -12,6 +13,12 @@ public class ConverterTest {
         ///////////////////
         // TEST UNITAIRE //
         ///////////////////
+        
+        List<CategorieUnit> listMeasure = Converter.initialiserListCategorieUnite("src/main/java/org/data/stockage.xml");
+        ScreenView.afficherMesure(listMeasure);
+        ScreenView.afficherMesureEtUnite(listMeasure);
+        ScreenView.afficherUniteDeMesure(listMeasure.get(1));
+        
         //////////////////////////////////////
         // Ajouter unite qui existe deja //
         //////////////////////////////////////
@@ -265,6 +272,27 @@ public class ConverterTest {
         BigDecimal resultValeurOutKelToCel = Converter.convertTwoUnit("temperature", "celsius", "kelvin", valeurInKelToCel);
         assertEquals(valeurOutAttenduKelToCel, resultValeurOutKelToCel);
 
+        
+        CategorieUnit catUnite = new CategorieUnit("tata",  listMeasure.get(1).getLstUnite());
+        catUnite.setNameCategorieUnite("toto");
+        System.out.print(catUnite.getNameCategorieUnite());
+        catUnite.setLstUnite(listMeasure.get(2).getLstUnite());
+        CategorieUnit cateTest = new CategorieUnit("test");
+        cateTest.setLstUnite(catUnite.getLstUnite());
+        cateTest.getLstUnite().add(new Unit());
+        
+        catUnite.getLstUnite().get(1).setNomUnite("titi");
+        catUnite.getLstUnite().get(1).setadditionParRapportDefaut(BigDecimal.ONE);
+        catUnite.getLstUnite().get(1).setmultiParRapportDefaut(BigDecimal.ONE);
+        assertEquals("titi", catUnite.getLstUnite().get(1).getNameUnite());
+        assertEquals(BigDecimal.ONE, catUnite.getLstUnite().get(1).getadditionParRapportDefaut());
+        assertEquals(BigDecimal.ONE, catUnite.getLstUnite().get(1).getmultiParRapportDefaut());
+                
+                
+                
+        
+        
     }
+        
 
 }
