@@ -11,11 +11,34 @@
     <description> Converter project by Alexandre Clochard and Antoine Gervais For M1 Miage </description>
     <name>umlConvertisseur</name>
     
+    <developers>
+        <developer>
+            <name>Antoine Gervais</name>
+            <id>antoine</id>
+            <email>ant.gervais@gmail.com</email>
+        </developer>
+        <developer>
+            <name>Alexandre Clochard</name>
+            <id>Alexandre</id>
+            <email>alexandreclochard@gmail.com</email>
+        </developer>
+    </developers> 
+    
+    <scm>
+        <connection>scm:git:https://github.com/wizidi/umlConvertisseur</connection>
+        <url>https://github.com/wizidi/umlConvertisseur</url>
+        <developerConnection>scm:git:https://github.com/wizidi/umlConvertisseur</developerConnection>
+    </scm>
+    
+    <organization>
+        <name>GervaisClochardMiageConverter</name>
+    </organization>
     
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.7</maven.compiler.source>
     </properties>
+    
     <build>
         <plugins>
             <plugin>
@@ -88,10 +111,21 @@
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <version>2.9.1</version>
                 <configuration>
-                    <show>private</show>
+                    <show>public</show>
                     <nohelp>true</nohelp>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-changelog-plugin</artifactId>
+                <version>2.2</version>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.7.1.201405082137</version>
+            </plugin>
+            
         </plugins>
     </reporting>
         

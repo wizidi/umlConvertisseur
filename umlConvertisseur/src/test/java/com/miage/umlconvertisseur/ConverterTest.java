@@ -10,23 +10,16 @@ public class ConverterTest {
     @Test
     public void test() {
 
-        ///////////////////
         // TEST UNITAIRE //
-        ///////////////////
-        
         List<CategorieUnit> listMeasure = Converter.initialiserListCategorieUnite("src/main/java/org/data/stockage.xml");
         ScreenView.afficherMesure(listMeasure);
         ScreenView.afficherMesureEtUnite(listMeasure);
         ScreenView.afficherUniteDeMesure(listMeasure.get(1));
         
-        //////////////////////////////////////
-        // Ajouter unite qui existe deja //
-        //////////////////////////////////////
+        // Ajouter unite qui existe deja  
         Converter.addUnit("distance", "cm", new BigDecimal("120"), new BigDecimal("120"));
 
-        ////////////////////////////////////////////////////////
         // Ajouter une unite dans une mesure qui n'existe pas //
-        ////////////////////////////////////////////////////////
         Converter.addUnit("toto", "cm", new BigDecimal("120"), new BigDecimal("120"));
 
         // Supprimer une unite qui n'existe pas
@@ -35,16 +28,12 @@ public class ConverterTest {
         // Supprimer une unite qui n'existe pas et dont la categorie d'existe pas
         Converter.deleteUnit("toto", "toto");
 
-        //////////////////////////////////////
         // Convertir unite qui n'existe pas //
-        //////////////////////////////////////
         // distance : 1toto = 2tata
         @SuppressWarnings("unused")
         BigDecimal resultValeurOutTotoToTata = Converter.convertTwoUnit("distance", "toto", "tata", new BigDecimal("0"));
 
-        ///////////////
         // Convertir //
-        ///////////////
         // distance, valeur par defaut : m
         System.out.println("\n distance");
         // distance : 100cm = 1m
@@ -83,9 +72,7 @@ public class ConverterTest {
         BigDecimal resultValeurOutFtToYard = Converter.convertTwoUnit("distance", "ft", "yard", valeurInFtToYard);
         assertEquals(valeurOutAttenduFtToYard, resultValeurOutFtToYard);
 
-        /////////////
         // Ajouter //
-        /////////////
         // Creation d'une nouvelle unitee dans la mesure "distance" : le mille marin.
         // L'unite de reference de Mesure c'est le metre
         // 1 mille marin est egal a 1852m. Il n'y a pas de decalage
@@ -104,9 +91,7 @@ public class ConverterTest {
         BigDecimal resultValeurOutMToMilleMarin = Converter.convertTwoUnit("distance", "m", "milleMarin", valeurMToMilleMarin);
         assertEquals(valeurOutAttenduMToMilleMarin, resultValeurOutMToMilleMarin);
 
-        ///////////////
         // Supprimer //
-        ///////////////
         Converter.deleteUnit("distance", "milleMarin");
 
         System.out.println("\n temps");
@@ -275,10 +260,11 @@ public class ConverterTest {
         
         CategorieUnit catUnite = new CategorieUnit("tata",  listMeasure.get(1).getLstUnite());
         catUnite.setNameCategorieUnite("toto");
-        System.out.print(catUnite.getNameCategorieUnite());
+        assertEquals(catUnite.getNameCategorieUnite(),"toto");
         catUnite.setLstUnite(listMeasure.get(2).getLstUnite());
         CategorieUnit cateTest = new CategorieUnit("test");
         cateTest.setLstUnite(catUnite.getLstUnite());
+        assertEquals(cateTest.getLstUnite(), catUnite.getLstUnite());
         cateTest.getLstUnite().add(new Unit());
         
         catUnite.getLstUnite().get(1).setNomUnite("titi");
@@ -288,9 +274,6 @@ public class ConverterTest {
         assertEquals(BigDecimal.ONE, catUnite.getLstUnite().get(1).getadditionParRapportDefaut());
         assertEquals(BigDecimal.ONE, catUnite.getLstUnite().get(1).getmultiParRapportDefaut());
                 
-                
-                
-        
         
     }
         

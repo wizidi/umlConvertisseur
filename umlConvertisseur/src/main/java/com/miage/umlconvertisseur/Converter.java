@@ -280,7 +280,6 @@ public class Converter {
      */
     public static void deleteUnit(String nameCategorieUnite, String nameUnite) {
 	boolean validUnite = false;
-	boolean validCategorieUnite = false;
 	for (int i = 0; i < listMeasure.size(); i++) {
 	    if (listMeasure.get(i).getNameCategorieUnite().equals(nameCategorieUnite)) {
 		for (int j = 0; j < listMeasure.get(i).getLstUnite().size(); j++) {
@@ -290,8 +289,6 @@ public class Converter {
 			validUnite = true;
 		    }
 		}
-	    } else {
-		validCategorieUnite = true;
 	    }
 	}
 	if (!validUnite) {
