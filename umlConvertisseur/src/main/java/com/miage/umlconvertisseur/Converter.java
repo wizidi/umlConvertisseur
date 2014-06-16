@@ -19,22 +19,22 @@ import org.xml.sax.SAXException;
  * This class contains methods to convert Unit
  * 
  * @author Antoine and Alexandre
- * 
- *
+ * @version 1.0
  */
 public class Converter {
 
     // initialise la liste des categorieUnites depuis le fichier XML
     // initializes the list of measures from the XML file
     public static List<CategorieUnit> listMeasure = initialiserListCategorieUnite("src/main/java/org/data/stockage.xml");
+  
     /**
      * This function is used to convert one unit to another
      * 
-     * @param categorieUnite
-     * @param nameUniteIn
-     * @param nameUniteOut
-     * @param valueIn
-     * @return BigDecimal
+     * @param categorieUnite name of the categorie of Unit
+     * @param nameUniteIn the name of the unit input
+     * @param nameUniteOut the name of the unit output
+     * @param valueIn the value of the convertion input
+     * @return BigDecimal the convert value
      */
     public static BigDecimal convertTwoUnit(String categorieUnite, String nameUniteIn,
 	    String nameUniteOut, BigDecimal valueIn) {
@@ -111,13 +111,11 @@ public class Converter {
 
 
 
-    // ////////////////////////////
     // Initialiser list categorieUnite //
-    // ////////////////////////////
     /***
      * This function initialize liste of categories
      * 
-     * @param 
+     * @param fichierXml name of the path where the xml file
      * @return List of CategorieUnit
      * 
      */
@@ -217,9 +215,7 @@ public class Converter {
 	return listeCategorieUnite;
     }
 
-    // /////////////////
     // Ajouter // ADD //
-    // /////////////////
     /**
      * This procedure is to add a unit into list of measure
      * 
@@ -269,9 +265,7 @@ public class Converter {
 
     }
 
-    // ////////////
     // Supprimer //
-    // ////////////
     /**
      * This procedure is to delete a unit
      * 
@@ -297,9 +291,7 @@ public class Converter {
 	} 
     }
 
-    // /////////////////////////////////////////////////////// 
     // Enregistrer dans le fichier XML // Save the XML file // 
-    // ///////////////////////////////////////////////////////
     /**
      * This procedure is to save unit into XML file
      * 

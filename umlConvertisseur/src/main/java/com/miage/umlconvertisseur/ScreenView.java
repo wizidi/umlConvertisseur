@@ -6,6 +6,12 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * This class contains the GUI
+ * 
+ * @author Antoine
+ * @version 1.0
+ */
 public class ScreenView {
 
     static List<CategorieUnit> listMeasure = Converter.listMeasure;
@@ -15,9 +21,6 @@ public class ScreenView {
         start();
     }
 
-    // /////// 
-    // MENU //
-    // ///////
     
     /**
      * Menu
